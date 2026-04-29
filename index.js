@@ -97,6 +97,13 @@ App.get("/*", (req, res) => {
 
 const PORT = process.env.PORT || 5500;
 
+// Add this to create the temp folder if it doesn't exist
+if (!fs.existsSync(path.join(__dirname, 'temp'))) {
+  fs.mkdirSync(path.join(__dirname, 'temp'));
+}
+
+const PORT = process.env.PORT || 5500;
+
 App.listen(PORT, () => {
   console.log(`Server is listening at ${PORT}`);
 });
