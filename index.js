@@ -95,8 +95,6 @@ App.get("/*", (req, res) => {
   res.send("404 - Not found");
 });
 
-const PORT = process.env.PORT || 5500;
-
 // Add this to create the temp folder if it doesn't exist
 if (!fs.existsSync(path.join(__dirname, 'temp'))) {
   fs.mkdirSync(path.join(__dirname, 'temp'));
