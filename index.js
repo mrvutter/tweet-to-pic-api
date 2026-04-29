@@ -24,7 +24,17 @@ const grapTweet = async (link, res, options) => {
 
     await page.emulate(iPhone);
 
-    await page.goto(link, { waitUntil: "networkidle2" });
+     // Extract the tweet ID from the URL
+    const idMatch = link.match(/\/status\/(\d+)/);
+    const tweetId = idMatch ? idMatch[1] : null;
+    
+    if (!tweetId) {
+        throw new Error("Invalid tweet link");
+    }
+    
+    // Navigate to the official Twitter embed page which has NO login wall!
+    await page.goto(`https://platform.twitter.com/embed/Tweet.html?id=${tweetId}`, { waitUntil: "networkidle2" });
+
 
     const hrefElement = await page.$("article");
     await page.evaluate(() => {
