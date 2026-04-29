@@ -24,7 +24,7 @@ const grapTweet = async (link, res, options) => {
 
     await page.emulate(iPhone);
 
-     // Extract the tweet ID from the URL
+    // Extract the tweet ID from the URL
     const idMatch = link.match(/\/status\/(\d+)/);
     const tweetId = idMatch ? idMatch[1] : null;
     
@@ -32,9 +32,8 @@ const grapTweet = async (link, res, options) => {
         throw new Error("Invalid tweet link");
     }
     
-    // Navigate to the official Twitter embed page which has NO login wall!
-    await page.goto(`https://platform.twitter.com/embed/Tweet.html?id=${tweetId}`, { waitUntil: "networkidle2" });
-
+    // Navigate to the official Twitter embed page WITH DARK MODE 🌙
+    await page.goto(`https://platform.twitter.com/embed/Tweet.html?id=${tweetId}&theme=dark`, { waitUntil: "networkidle2" });
 
     const hrefElement = await page.$("article");
     await page.evaluate(() => {
