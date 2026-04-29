@@ -22,7 +22,8 @@ const grapTweet = async (link, res, options) => {
     });
     const page = await browser.newPage();
 
-    await page.emulate(iPhone);
+    // Use a standard width for a clean tweet card
+    await page.setViewport({ width: 600, height: 1000 });
 
     // Extract the tweet ID from the URL
     const idMatch = link.match(/\/status\/(\d+)/);
